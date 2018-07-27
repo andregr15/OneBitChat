@@ -10,10 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_192522) do
+ActiveRecord::Schema.define(version: 2018_07_27_184401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "slug"
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_channels_on_team_id"
+    t.index ["user_id"], name: "index_channels_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.integer "messageable_id"
+    t.string "messageable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.bigint "user_one_id_id"
+    t.bigint "user_two_id_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_talks_on_team_id"
+    t.index ["user_one_id_id"], name: "index_talks_on_user_one_id_id"
+    t.index ["user_two_id_id"], name: "index_talks_on_user_two_id_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "slug"
+    t.bigint "user_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id_id"], name: "index_teams_on_user_id_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -33,4 +72,8 @@ ActiveRecord::Schema.define(version: 2018_07_25_192522) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "channels", "teams"
+  add_foreign_key "channels", "users"
+  add_foreign_key "messages", "users"
+  add_foreign_key "talks", "teams"
 end
