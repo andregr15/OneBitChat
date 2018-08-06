@@ -129,10 +129,10 @@ RSpec.describe ChannelsController, type: :controller do
     context 'User is the team owner' do
       it 'should returns http success' do
         team = create(:team, user: @current_user)
-        channel_owner: create(:user)
+        channel_owner = create(:user)
 
         team.users << channel_owner
-        @channel = create(:channel, team: team, user: channel_user)
+        @channel = create(:channel, team: team, user: channel_owner)
 
         delete :destroy, params: { id: channel.id }
         expect(response).to have_http_status(:success)
