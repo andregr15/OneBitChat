@@ -56,7 +56,7 @@ RSpec.describe TeamsController, type: :controller do
   end
 
 
-  decribe 'POST #create' do
+  describe 'POST #create' do
     before :each do
       @team_attributes = attributes_for(:team, user: @current_user)
       post :create, params: { team: @team_attributes }

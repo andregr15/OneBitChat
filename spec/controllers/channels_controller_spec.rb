@@ -31,7 +31,7 @@ RSpec.describe ChannelsController, type: :controller do
       it 'should create the channel with the right params' do
         expect(Channel.last.slug).to eql(@channel_attributes[:slug])
         expect(Channel.last.user).to eql(@current_user)
-        exepct(Channel.last.team).to eql(@team)
+        expect(Channel.last.team).to eql(@team)
       end
 
       it 'should return the right values of the created channel' do
@@ -83,7 +83,7 @@ RSpec.describe ChannelsController, type: :controller do
         response_hash = JSON.parse(response.body)
 
         expect(response_hash['slug']).to eql(@channel.slug)
-        exepct(response_hash['user_id']).to eql(@channel.user.id)
+        expect(response_hash['user_id']).to eql(@channel.user.id)
         expect(response_hash['team_id']).to eql(@channel.team.id)
       end
 
@@ -98,7 +98,7 @@ RSpec.describe ChannelsController, type: :controller do
         expect(response_hash['messages'][0]['body']).to eql(@message1.body)
         expect(response_hash['messages'][0]['user_id']).to eql(@message1.user.id)
         expect(response_hash['messages'][1]['body']).to eql(@message2.body)
-        expect(response_hash['messages'][1]['user_id']).to eql(@message1.user.id)
+        expect(response_hash['messages'][1]['user_id']).to eql(@message2.user.id)
       end
     end
 
@@ -116,13 +116,15 @@ RSpec.describe ChannelsController, type: :controller do
   describe 'DELETE #destroy' do
     context 'User is a team member' do
       context 'User is the channel owner' do
-        team = create(:team)
-        team.users << @current_user
-        channel = create(:channel, team: team, user: @current_user)
+        it 'should returns http success' do
+          team = create(:team)
+          team.users << @current_user
+          channel = create(:channel, team: team, user: @current_user)
 
-        delete :destroy, params: { id: channel.id }
+          delete :destroy, params: { id: channel.id }
 
-        expect(response).to have_http_status(:success)
+          expect(response).to have_http_status(:success)
+        end
       end
     end
 
@@ -132,7 +134,7 @@ RSpec.describe ChannelsController, type: :controller do
         channel_owner = create(:user)
 
         team.users << channel_owner
-        @channel = create(:channel, team: team, user: channel_owner)
+        channel = create(:channel, team: team, user: channel_owner)
 
         delete :destroy, params: { id: channel.id }
         expect(response).to have_http_status(:success)
