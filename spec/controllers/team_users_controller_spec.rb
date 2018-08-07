@@ -31,7 +31,7 @@ RSpec.describe TeamUsersController, type: :controller do
       end
 
       it 'should returns http forbidden' do
-        post :create, params: { team_user: { user_id: @guest_user.id, team_id: @team_id } }
+        post :create, params: { team_user: { user_id: @guest_user.id, team_id: @team.id } }
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe TeamUsersController, type: :controller do
       end
 
       it 'should returns http success' do
-        delete :destroy, params: { user_id: @guest_user.id, team_id: @team.id }
+        delete :destroy, params: { id: @guest_user.id, team_id: @team.id }
         expect(response).to have_http_status(:success)
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe TeamUsersController, type: :controller do
       end
 
       it 'should returns http forbidden' do
-        delete :destroy, params: { user_id: @guest_user.id, team_id: @team.id }
+        delete :destroy, params: { id: @guest_user.id, team_id: @team.id }
         expect(response).to have_http_status(:forbidden)
       end
     end

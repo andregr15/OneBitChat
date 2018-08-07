@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(version: 2018_07_27_195628) do
   end
 
   create_table "talks", force: :cascade do |t|
-    t.bigint "user_one_id_id"
-    t.bigint "user_two_id_id"
+    t.bigint "user_one_id"
+    t.bigint "user_two_id"
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_talks_on_team_id"
-    t.index ["user_one_id_id"], name: "index_talks_on_user_one_id_id"
-    t.index ["user_two_id_id"], name: "index_talks_on_user_two_id_id"
+    t.index ["user_one_id"], name: "index_talks_on_user_one_id"
+    t.index ["user_two_id"], name: "index_talks_on_user_two_id"
   end
 
   create_table "team_users", force: :cascade do |t|
