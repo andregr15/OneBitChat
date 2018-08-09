@@ -1,7 +1,16 @@
-@import "materialize/components/color-variables";
-$primary-color: color("green", "accent-3") !default;
-$secondary-color: color("green", "accent-3") !default;
+// @import "materialize/components/color-variables";
+// $primary-color: color("green", "accent-3") !default;
+// $secondary-color: color("green", "accent-3") !default;
 
 @import 'materialize';
 @import 'material_icons';
-@import 'general';
+// @import 'general';
+@import 'shared/_navbar';
+@import 'shared/_sidebar';
+@import 'teams/_sidebar';
+@import 'teams/index';
+@import 'teams/show';
+
+.container {
+  width: 90%;
+}
