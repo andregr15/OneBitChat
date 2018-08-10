@@ -1,8 +1,8 @@
-<ul class="side-nav fixed sid-nav-channel" id="side-bar-channel">
+<ul class="sidenav sidenav-fixed side-nav-channel" id="side-bar-channel">
   <li>
     <div>
       <span class="team_title"><%= @team.slug %></span>
-      <%= if can? :destroy, @team %>
+      <% if can? :destroy, @team %>
         <a href="#" class="right team_icon remove_team">
           <i class="material-icons" id="<%= @team.id %>">settings</i>
         </a>
@@ -11,13 +11,12 @@
   </li>
   <li>
     <!-- <span class="channel_title">Channels</span> -->
-    <ul class="collapsible" data-collapsible="accordion">
+    <ul class="collapsible">
       <li>
         <div class="collapsible-header">
           <i class="material-icons">list</i>
           Channels
         </div>
-
         <div class="collapsible-body list">
           <span>
             <ul class="channels">
@@ -106,8 +105,8 @@
   </li>
 </ul>
 
-<div class="fixed-action-btn horizontal hide-on-med-and-up">
-  <a href="" class="button-collapse btn-floating btn-large waves-effect waves-light grey bottom" data-activates="side-bar-channel">
+<div class="fixed-action-btn horizontal hide-on-large-only">
+  <a href="#" class="sidenav-trigger btn-floating btn-large waves-effect waves-light grey bottom" data-target="side-bar-channel">
     <i class="material-icons">menu</i>
   </a>
 </div>

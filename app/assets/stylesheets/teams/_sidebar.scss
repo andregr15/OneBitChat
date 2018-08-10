@@ -38,6 +38,10 @@
     background-color: #f5f5f5 !important;
     padding-left: 10px;
   }
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 56px;
+  }
 }
 
 .team_content {
@@ -45,6 +49,7 @@
 }
 
 @media only screen and (max-width: 992px) {
+  
   .team_content {
     padding-left: 0px;
   }

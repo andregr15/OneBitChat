@@ -1,4 +1,4 @@
-<ul class="sid-nav" id="side-bar">
+<ul class="sidenav" id="side-bar">
   <% if current_user %>
     <li>
       <a href="/users/edit">Profile</a>
@@ -7,12 +7,12 @@
       <div class="divider"></div>
     </li>
     <li>
-      <a href="#" class="dropdown-button" data-activates="teams_side" data-beloworigin="true" alignment="left">
+      <a href="#" class="dropdown-trigger" data-target="teams_side" alignment="left">
         My Teams
         <i class="material-icons right">arrow_drop_down</i>
       </a>
 
-      <ul class="dropdown-content" id="team_side">
+      <ul class="dropdown-content" id="teams_side">
         <% current_user.my_teams.each do |team|  %>
           <li>
             <a href="/<%= team.slug %>"><%= team.slug %></a>
@@ -21,7 +21,7 @@
         <% end  %>
 
         <li>
-          <a href="#add_team_modal">+ Add Team</a>
+          <a href="#add_team_modal" class="modal-trigger">+ Add Team</a>
         </li>
       </ul>
     </li>

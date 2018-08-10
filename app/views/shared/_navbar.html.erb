@@ -5,6 +5,8 @@
         <i class="material-icons">chat_bubble_outline</i>
         OneBitChat
       </a>
+      
+      <a href="#" data-target="side-bar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
@@ -12,7 +14,7 @@
             <a href="/users/edit">Profile</a>
           </li>
           <li>
-            <a href="#" class="dropdown-button" data-activates="teams" data-beloworigin="true" alignment="left">
+            <a href="#" class="dropdown-trigger" data-target="teams" alignment="left">
               My teams
               <i class="material-icons right">arrow_drop_down</i>
             </a>
@@ -26,7 +28,7 @@
                 <li class="divider"></li>
               <% end %>
               <li>
-                <a href="#add_team_modal">+ Add Team</a>
+                <a href="add_team_modal" class="modal-trigger" data-target="add_team_modal">+ Add Team</a>
               </li>
             </ul>
           </li>
