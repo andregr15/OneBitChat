@@ -10,20 +10,20 @@
     </div>
   </li>
   <li>
+    <div class="divider"></div>
+  </li>
+  <li>
     <!-- <span class="channel_title">Channels</span> -->
     <ul class="collapsible">
       <li>
-        <div class="collapsible-header">
-          <i class="material-icons">list</i>
-          Channels
-        </div>
+        <div class="collapsible-header"><i class="material-icons">list</i>Channels</div>
         <div class="collapsible-body list">
           <span>
             <ul class="channels">
               <% @team.channels.each do |channel|  %>
                 <li class="channel_<%= channel.id %>">
                   <div>
-                    <a href="#" class="open_channel">
+                    <a href="#" class="open_channel" id="<%= channel.id %>">
                       <span id="<%= channel.id %>">#<%= channel.slug %></span>
                     </a>
 

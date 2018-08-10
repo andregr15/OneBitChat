@@ -5,21 +5,22 @@ clean_messages = () ->
   $('.messages').html('')
   $('.chat_name').html('')
 
-add_message = (message, message_date, name) ->
+window.add_message = (message, message_date, name) ->
   $('.messages').append(
     '<div class="message col s12">' +
       '<div class="col m2 l1">' +
-        '<i class="material-icons prefix right profile_icon>account_circle</i>"' +
+        '<i class="material-icons prefix right profile_icon">account_circle</i>' +
       '</div>' +
       '<div class="col m10 s9">' +
         '<div class="row"' +
-          '<strong>' + name + '</strong>' +
-          '<span class="date">' + message_date + '</span>' +
+          '<strong>'+name+'</strong>' +
+          '<span class="date">'+message_date+ '</span>' +
         '</div>' +
-        '<div class="row">'+ message +'</div>' +
+        '<div class="row">'+message+'</div>' +
       '</div>' +
     '</div>'
   )
+  $('.messages').animate({ scrollTop: $('.messages').prop('scrollHeight') }, 100)
 
 window.open = (id, type) ->
   clean_messages()
@@ -36,10 +37,12 @@ window.open = (id, type) ->
       else
         set_chat(data['slug'])
 
+      window.change_chat(id, type, $('.team_id').val())
+
       if data['messages']
-        for messages in data['messages']
+        for message in data['messages']
           do ->
-            add_message(message['body'], message['date'], message['user']['name'])
+            window.add_message(message['body'], message['date'], message['user']['name'])
     error: (jqXHR, textStatus, errorThrown) ->
       M.toast({html: 'Problem to get ' + type + ' informations &nbsp;<strong>:(</strong>', displayLength: 4000, classes: 'red'})
       
