@@ -11,12 +11,14 @@ $(document).on 'turbolinks:load', ->
 
 
 $(document).on 'ready turbolinks:before-visit', ->
-  elem = document.querySelector('#side-bar');
-  instance = M.Sidenav.getInstance(elem);
-  if instance
-    instance.destroy()
+  if $('#side-bar').length
+    elem = $('#side-bar');
+    instance = M.Sidenav.getInstance(elem);
+    if instance
+      instance.destroy()
 
-  elem = document.querySelector('#side-bar-channel');
-  instance = M.Sidenav.getInstance(elem);
-  if instance
-    instance.destroy()
+  if $('#side-bar-channel').length
+    elem = $('#side-bar-channel');
+    instance = M.Sidenav.getInstance(elem);
+    if instance
+      instance.destroy()
