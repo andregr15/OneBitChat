@@ -3,11 +3,11 @@
     <div>
       <span class="team_title"><%= @team.slug %></span>
       <% if can? :destroy, @team %>
-        <a href="#" class="right team_icon remove_team">
+        <a href="#" class="right team_icon remove_team" id="<%= @team.id %>">
           <i class="material-icons" id="<%= @team.id %>">settings</i>
         </a>
       <% else %>
-        <a href="#" class="right team_icon leave_team">
+        <a href="#" class="right team_icon leave_team" id="<%= current_user.id %>">
           <i class="material-icons" id="<%= current_user.id %>">exit_to_app</i>
         </a>
       <% end %>

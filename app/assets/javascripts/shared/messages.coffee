@@ -24,6 +24,11 @@ window.add_message = (message, message_date, name) ->
 
 window.open = (id, type) ->
   clean_messages()
+  if type == 'talks'
+    check_user(id)
+  else
+    set_member_alert(true)
+
   $.ajax '/' + type + '/' + id,
     type: 'GET',
     contentType: 'application/json',
@@ -47,6 +52,28 @@ window.open = (id, type) ->
       M.toast({html: 'Problem to get ' + type + ' informations &nbsp;<strong>:(</strong>', displayLength: 4000, classes: 'red'})
       
   return false
+
+check_user = (id) ->
+  $.ajax '/team_users/' + id,
+    type: 'GET'
+    dataType: 'json',
+    data: {
+      team_id: $('.team_id').val()
+    },
+    success: (data, text, jqXHR) ->
+      set_member_alert(data)
+    error: (jqXHR, textStatus, errorThrown) ->
+      M.toast({ html: 'Problem to check if the user still is a member of the team <strong>:(</strong>', displayLength: 4000, classes: 'red' })
+
+  return false
+
+set_member_alert = (data) ->
+  if data != true
+    $('#message').append('User does not belongs to the team anymore! It\'s no more possible so send messages to him/her.')
+    $('#textarea').prop('readonly', true)
+  else
+    $('#message').html('')
+    $('#textarea').prop('readonly', false)
 
 window.add = (slug, id, type) ->
   additional = if type == 'channel' then '#' else ''

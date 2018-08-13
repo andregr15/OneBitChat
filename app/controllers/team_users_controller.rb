@@ -1,5 +1,15 @@
 class TeamUsersController < ApplicationController
-  before_action :set_team_user, only: [:destroy]
+  before_action :set_team_user, only: [:destroy, :show]
+
+  def show
+    respond_to do |format|
+      if @team_user
+        format.json { render json: true }
+      else
+        format.json { render json: false }
+      end
+    end
+  end
 
   def create
     @team_user = TeamUser.new(team_user_params)
