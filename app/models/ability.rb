@@ -21,8 +21,12 @@ class Ability
         t.user_one_id == user.id || t.user_two_id == user.id
       end
 
-      can [:create, :destroy], TeamUser do |t|
+      can [:create], TeamUser do |t|
         t.team.user_id == user.id
+      end
+
+      can [:destroy], TeamUser do |t|
+        t.team.user_id == user.id || t.team.users.where(id: user.id).present?
       end
     end
   end
