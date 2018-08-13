@@ -53,7 +53,7 @@ window.add = (slug, id, type) ->
   $('.' + type + 's').prepend(
     '<li class="' + type + '_' + id + '">' +
       '<div>' +
-        '<a href="#" class="open_' + type + '">' +
+        '<a href="#" class="open_' + type + '" id="' + id + '">' +
           '<span id="' + id + '">' + additional + slug + '</span>' +
         '</a>' +
         '<a class="right remove_' + type + '" href="#" id="' + id + '">' +
