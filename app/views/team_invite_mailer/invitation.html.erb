@@ -1,0 +1,7 @@
+<h1>Grettings <%= @user.name %></h1>
+
+<p>
+  You have been invited to participate to the team <%= @team.slug %>.
+  To accept this invite please click in the link below:
+  <%= link_to('Confirmation', "/team/#{@team.id}/team_users/#{@user.id}") %>
+</p>
