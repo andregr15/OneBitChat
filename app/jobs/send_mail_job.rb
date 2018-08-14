@@ -1,7 +1,12 @@
 class SendMailJob < ApplicationJob
   queue_as :default
 
-  def perform(team, user)
-    TeamInviteMailer.invite(team, user).deliver_later
+  def initialize(team, user)
+    @team = team
+    @user = user
+  end
+
+  def perform
+    TeamInviteMailer.invitation(@team, @user).deliver_later
   end
 end

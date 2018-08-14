@@ -26,6 +26,12 @@ services:
       - '.:/app'
       - 'gems:/gems'
 
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+      - 1025:1025
+      - 1080:1080
+
 volumes:
   postgres:
   redis:
