@@ -3,28 +3,27 @@ require "rails_helper"
 RSpec.describe TeamInviteMailer, type: :mailer do
   describe "invitation" do
     before do 
-      @user = create(:user)
-      @team = create(:team, user: @user)
-      @user1 = create(:user)
+      @team = create(:team)
+      @invite = create(:invite, team: @team)
 
-      @mail = TeamInviteMailer.invitation(@team, @user1)
+      @mail = TeamInviteMailer.invitation(@invite)
     end
     
     it 'should renders the headers' do
-      expect(@mail.subject).to eq("Invitation to team #{@team.slug}")
-      expect(@mail.to).to eq([@user1.email])
+      expect(@mail.subject).to eq("Invitation to team #{@invite.team.slug}")
+      expect(@mail.to).to eq([@invite.email])
     end
 
     it 'should have the team name in the body' do
-      expect(@mail.body.encoded).to match(@team.slug)
+      expect(@mail.body.encoded).to match(@invite.team.slug)
     end
 
     it 'should have the user name in the body' do
-      expect(@mail.body.encoded).to match(@user1.name)
+      expect(@mail.body.encoded).to match(@invite.team.user.name)
     end
 
     it 'should have the link to user accepts the invitation' do
-      expect(@mail.body.encoded).to match("/team/#{@team.id}/team_users/#{@user1.id}")
+      expect(@mail.body.encoded).to match("/invitations/#{@invite.token}")
     end
   end
 

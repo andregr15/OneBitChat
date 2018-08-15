@@ -1,6 +1,5 @@
-Grettings <%= @user.name %>
+Grettings <%= @invite.email %>
 
-You have been invited to participate to the team <%= @team.slug %>.
+You have been invited to participate to the team <%= @invite.team.slug %> by the user <%= @invite.team.user.name %>.
 To accept this invite please click in the link below:
-<%= link_to('Confirmation', "/team/#{@team.id}/team_users/#{@user.id}") %>
-
+<%= link_to('Confirmation', "/invitations/#{@invite.token}") %>

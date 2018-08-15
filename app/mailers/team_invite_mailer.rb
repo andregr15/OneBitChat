@@ -5,9 +5,8 @@ class TeamInviteMailer < ApplicationMailer
   #
   #   en.team_invite_mailer.invitation.subject
   #
-  def invitation(team, user)
-    @team = team
-    @user = user
-    mail to: @user.email, subject: "Invitation to team #{ @team.slug }"
+  def invitation(invite)
+    @invite = invite
+    mail to: @invite.email, subject: "Invitation to team #{ @invite.team.slug }"
   end
 end
