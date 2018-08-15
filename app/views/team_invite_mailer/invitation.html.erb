@@ -3,5 +3,5 @@
 <p>
   You have been invited to participate to the team <%= @invite.team.slug %> by the user <%= @invite.team.user.name %>.
   To accept this invite please click in the link below:
-  <%= link_to('Confirmation', "/invitations/#{@invite.token}") %>
+  <%= link_to('Confirmation', invitations_url(@invite.token)) %>
 </p>

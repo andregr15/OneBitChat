@@ -23,7 +23,7 @@ RSpec.describe TeamInviteMailer, type: :mailer do
     end
 
     it 'should have the link to user accepts the invitation' do
-      expect(@mail.body.encoded).to match("/invitations/#{@invite.token}")
+      expect(@mail.body.encoded).to match(@invite.token)
     end
   end
 
