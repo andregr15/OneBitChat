@@ -37,6 +37,12 @@ class TeamUsersController < ApplicationController
 
   def set_team_user
     @team_user = TeamUser.find_by(user_id: params[:id], team_id: params[:team_id])
+    if !@team_user
+      @team = Team.find(params[:team_id])
+      if @team.user.id == params[:id].to_i
+        @team_user = @team.user.id
+      end
+    end
   end
 
   def team_user_params

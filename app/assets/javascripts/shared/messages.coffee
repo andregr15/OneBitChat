@@ -1,9 +1,18 @@
-set_chat = (name) ->
+set_chat = (name, type, id) ->
   $('.chat_name').html(name)
+  $('.chat_name').attr('id', set_type(type) + '_' +id)
 
 clean_messages = () ->
   $('.messages').html('')
   $('.chat_name').html('')
+
+set_type = (type) ->
+  return if type == 'talk' || type == 'talks' then 'user' else 'channel'
+
+clean_notifications = (type, id) ->
+  $('.'+set_type(type)+'_'+id).removeClass(
+    'teal lighten-4'
+  )
 
 window.add_message = (message, message_date, name) ->
   $('.messages').append(
@@ -24,6 +33,8 @@ window.add_message = (message, message_date, name) ->
 
 window.open = (id, type) ->
   clean_messages()
+  clean_notifications(type, id)
+
   if type == 'talks'
     check_user(id)
   else
@@ -38,9 +49,9 @@ window.open = (id, type) ->
     },
     success: (data, text, jqXHR) ->
       if type == 'talks'
-        set_chat(data['user']['name'])
+        set_chat(data['user']['name'], type, id)
       else
-        set_chat(data['slug'])
+        set_chat(data['slug'], type, id)
 
       window.change_chat(id, type, $('.team_id').val())
 
@@ -89,3 +100,10 @@ window.add = (slug, id, type) ->
       '</div>' +
     '</li>'
   )
+
+window.set_notification = (type, id) ->
+  if $('.chat_name').attr('id') != type+'_'+ id
+    $('.'+set_type(type)+'_'+id).addClass(
+      #'<span class="new badge"></span>'
+      'teal lighten-4'
+    )
