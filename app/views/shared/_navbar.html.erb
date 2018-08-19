@@ -11,7 +11,10 @@
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
           <li>
-            <a href="/users/edit">Profile</a>
+            <a href="/users/edit" class="valign-wrapper">
+              <img src="<%= current_user.avatar.thumb %>" alt="avatar image" class="responsive-img circle center">
+              &nbsp;Profile
+            </a>
           </li>
           <li>
             <a href="#" class="dropdown-trigger" data-target="teams" alignment="left">

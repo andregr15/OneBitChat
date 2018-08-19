@@ -14,11 +14,16 @@ clean_notifications = (type, id) ->
     'teal lighten-4'
   )
 
-window.add_message = (message, message_date, name) ->
+window.add_message = (message, message_date, name, avatar) ->
   $('.messages').append(
     '<div class="message col s12">' +
       '<div class="col m2 l1">' +
-        '<i class="material-icons prefix right profile_icon">account_circle</i>' +
+        (
+          if avatar != null && avatar != undefined
+            '<img class="responsive-img circle cropcircle" src="'+avatar+'"/>'
+          else
+            '<i class="material-icons prefix right profile_icon">account_circle</i>'
+        ) +
       '</div>' +
       '<div class="col m10 s9">' +
         '<div class="row"' +
@@ -58,7 +63,7 @@ window.open = (id, type) ->
       if data['messages']
         for message in data['messages']
           do ->
-            window.add_message(message['body'], message['date'], message['user']['name'])
+            window.add_message(message['body'], message['date'], message['user']['name'], if message['user']['avatar'] != undefined then message['user']['avatar']['thumb']['url'] else undefined)
     error: (jqXHR, textStatus, errorThrown) ->
       M.toast({html: 'Problem to get ' + type + ' informations &nbsp;<strong>:(</strong>', displayLength: 4000, classes: 'red'})
       

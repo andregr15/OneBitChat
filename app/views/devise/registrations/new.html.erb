@@ -8,6 +8,13 @@
       <%= devise_error_messages! %>
 
       <div class="input-field">
+        <%= f.label 'Avatar'%>
+        <br/>
+        <br/>
+        <%= f.file_field :avatar%>
+      </div>
+
+      <div class="input-field">
         <%= f.text_field :name, autofocus:true %>
         <%= f.label :name %>
       </div>

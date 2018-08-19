@@ -9,7 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y -qq --no-install-recommends \
-    build-essential nodejs libpq-dev
+    build-essential nodejs libpq-dev imagemagick
 
 ENV INSTALL_PATH /app
 
