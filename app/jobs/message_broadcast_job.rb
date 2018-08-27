@@ -5,12 +5,15 @@ class MessageBroadcastJob < ApplicationJob
     m = message.messageable
     chat_name = "#{m.team_id}_" + (m.class == Channel ? 'channels' : 'talks') + "_#{m.id}"
 
+    avatar = (message.user.avatar.present? == true ? message.user.avatar.thumb.url : nil)
+
     ActionCable.server.broadcast(
       chat_name,
       {
         message: message.body,
         date: message.created_at.strftime('%d/%m/%y'),
-        name: message.user.name
+        name: message.user.name,
+        avatar: avatar
       }
     )
 
