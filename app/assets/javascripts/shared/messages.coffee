@@ -34,7 +34,6 @@ window.add_message = (message, message_date, name, avatar) ->
       '</div>' +
     '</div>'
   )
-  console.log avatar
   $('.messages').animate({ scrollTop: $('.messages').prop('scrollHeight') }, 100)
 
 window.open = (id, type) ->
